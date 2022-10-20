@@ -20,5 +20,5 @@
 
 # echo -e "\e[1;31m This is red text \e[0m"
 
-echo -e "\e[1;31m This is red text \e[0m"
+echo -e "\e[2;31m This is red text \e[0m"
 
