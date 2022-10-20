@@ -20,5 +20,12 @@
 
 # echo -e "\e[1;31m This is red text \e[0m"
 
-echo -e "\e[2;31m This is red text \e[0m"
+echo -e "\e[1;31m This is red text \e[0m"
 
+echo -e "\e[1;35m This is red text \e[105m"
+
+echo -e "\e[1;35m This is red text \e[43m"
+
+echo -e "\e[1;95m This is red text \e[44m"
+
+echo -e "\e[1;93m This is red text \e[107m"
