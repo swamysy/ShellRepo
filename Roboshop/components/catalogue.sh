@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "I am cart catalogue"
+echo "I am catalogue component"
