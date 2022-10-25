@@ -9,29 +9,25 @@ if [ $USERID -ne 0 ] ; then
     exit 1
 fi
 
+stat() {
+    if [ $1 -le 0 ] ; then
+        echo -e "\e[32m Success \e[0m"
+    else 
+        echo -e "\e[31m Failure \e[0m"
+    fi
+}
+
 echo -n "Installing nginx package"
 yum install nginx -y &>> /tmp/frontend.log
-if [ $? -le 0 ] ; then
-    echo -e "\e[32m Success \e[0m"
-else 
-    echo -e "\e[31m Failure \e[0m"
-fi
+stat $?
 
 echo -n "Downloading the frontend component"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
-if [ $? -le 0 ] ; then
-    echo -e "\e[32m Success \e[0m"
-else 
-    echo -e "\e[31m Failure \e[0m"
-fi
+stat $?
 
 echo -n "Performing Cleanup"
 rm -rf /usr/share/nginx/html/* &>> /tmp/frontend.log
-if [ $? -le 0 ] ; then
-    echo -e "\e[32m Success \e[0m"
-else 
-    echo -e "\e[31m Failure \e[0m"
-fi
+stat $?
 
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>> /tmp/frontend.log
