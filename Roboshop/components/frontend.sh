@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Verify the scripts been executed using root user or not.
+UID=$(id -u)
+
+if [ $UID ne 0 ] ; then
+    echo -e "\e[31m You must run this script as a root user or with sudo privilige \e[0m"
+fi
+
 yum install nginx -y
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 
