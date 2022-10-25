@@ -9,7 +9,15 @@ if [ $USERID -ne 0 ] ; then
     exit 1
 fi
 
-yum install nginx -y
+echo "Installing nginx package"
+yum install nginx -y &>> /tmp/frontend.log
+if [ $? -le 0 ] ; then
+    echo -e "\e[32m Success \e[0m"
+else 
+    echo -e "\e[31m Failure \e[0m"
+fi
+
+echo "Downloading the frontend component"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 
 rm -rf /usr/share/nginx/html/*
