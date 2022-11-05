@@ -38,3 +38,18 @@ stat $?
 echo -n "Changing permissions to $APPUSER"
 chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT
 stat $?
+
+echo -n "Configuring $COMPONENT service"
+sed -e 's/MONGO_DNSNAME/mongodb.robot.internal/' /home/roboshop/$COMPONENT/systemd.service
+mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+stat $?
+
+echo -n "Starting $COMPONENT service"
+
+systemctl daemon-reload &>> $LOGFILE
+systemctl start $COMPONENT &>> $LOGFILE
+stat $?
+# systemctl enable catalogue
+# systemctl status catalogue -l
+
+echo -n "_______________$COMPONENT Installation is Successful______________"
