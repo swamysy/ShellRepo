@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-# Verify the scripts been executed using root user or not.
-USERID=$(id -u)
 COMPONENT=frontend
 source components/common.sh
 
