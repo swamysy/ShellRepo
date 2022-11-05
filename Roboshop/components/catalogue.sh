@@ -24,10 +24,10 @@ echo -n "Downloading the component"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 stat $?
 
-echo -n "Downloading the $COMPONENT code to $APPUSER home directory:"
-cd /home/roboshop
+echo -n "Moving $COMPONENT code to $APPUSER home directory:"
+cd /home/$APPUSER
 unzip /tmp/catalogue.zip &>> $LOGFILE
-mv $COMPONENT-main $COMPONENT &>> $LOGFILE
+mv $COMPONENT-main $COMPONENT 
 stat $?
 
 echo -n "Installing nodejs dependencies:"
