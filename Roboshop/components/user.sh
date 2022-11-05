@@ -27,7 +27,11 @@ stat $?
 echo -n "Moving $COMPONENT code to $APPUSER home directory:"
 cd /home/$APPUSER
 unzip /tmp/$COMPONENT.zip &>> $LOGFILE
-mv $COMPONENT-main $COMPONENT 
+stat $?
+
+echo -n "Performing CleanUp"
+rm -rf $COMPONENT
+mv $COMPONENT-main $COMPONENT
 stat $?
 
 echo -n "Installing nodejs dependencies:"
