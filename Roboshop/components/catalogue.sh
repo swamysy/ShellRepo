@@ -9,13 +9,16 @@ echo -n "Configuring Node.js"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOGFILE
 stat $?
 
-echo -n "Installing Node.js"
+echo -n "Installing Nodejs"
 yum install nodejs -y &>> $LOGFILE
 stat $?
 
-echo -n "Creating App User"
-useradd $APPUSER
-stat $?
+id $APPUSER &>> $LOGFILE
+if [ $? -ne 0 ] then
+    echo -n "Creating App User"
+    useradd $APPUSER
+    stat $?
+if
 
 echo -n "Downloading the component"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"  &>> $LOGFILE
@@ -28,7 +31,7 @@ mv $COMPONENT-main $COMPONENT
 stat $?
 
 echo -n "Installing nodejs dependencies:"
-cd /home/roboshop/catalogue
+cd /home/roboshop/$COMPONENT
 npm install  &>> $LOGFILE
 stat $?
 
