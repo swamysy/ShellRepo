@@ -21,7 +21,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -n "Downloading the component"
-curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"  &>> $LOGFILE
+curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 stat $?
 
 echo -n "Downloading the $COMPONENT code to $APPUSER home directory:"
