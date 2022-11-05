@@ -21,10 +21,9 @@ cd /usr/share/nginx/html
 echo -n "Unzipping the component"
 unzip /tmp/frontend.zip &>> $LOGFILE
 stat $?
-
 mv frontend-main/* .
 mv static/* .
-rm -rf frontend-main README.md
+rm -rf frontend-main README.md &>> $LOGFILE
 
 echo -n "Configuring the reverse proxy settings"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
