@@ -26,7 +26,7 @@ stat $?
 
 echo -n "Moving $COMPONENT code to $APPUSER home directory:"
 cd /home/$APPUSER
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 stat $?
 
 echo -n "Performing CleanUp"
