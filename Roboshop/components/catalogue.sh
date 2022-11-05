@@ -27,10 +27,10 @@ stat $?
 echo -n "Downloading the $COMPONENT code to $APPUSER home directory:"
 cd /home/roboshop
 unzip /tmp/catalogue.zip &>> $LOGFILE
-mv $COMPONENT-main $COMPONENT
+mv $COMPONENT-main $COMPONENT &>> $LOGFILE
 stat $?
 
 echo -n "Installing nodejs dependencies:"
-cd /home/roboshop/$COMPONENT
+cd $COMPONENT
 npm install  &>> $LOGFILE
 stat $?
