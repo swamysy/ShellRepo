@@ -9,9 +9,9 @@ echo -n "Configuring Node.js"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOGFILE
 stat $?
 
-echo -n "Installing Nodejs"
-yum install nodejs -y &>> $LOGFILE
-stat $?
+#echo -n "Installing Nodejs"
+#yum install nodejs -y
+#stat $?
 
 id $APPUSER &>> $LOGFILE
 if [ $? -ne 0 ] then
