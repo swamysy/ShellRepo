@@ -7,9 +7,10 @@ echo -n "Configuring the repo"
 curl -s -o /etc/yum.repos.d/${COMPONENT}.repo https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/mongo.repo
 stat $?
 
-echo -n "Downloading the frontend component"
-curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
-stat $?
+echo -n "Installing $COMPONENT"
+yum install -y mongodb-org &>> $LOGFILE
+systemctl enable mongod
+systemctl start mongod
 
 echo -n "Performing Cleanup"
 rm -rf /usr/share/nginx/html/* &>> $LOGFILE
