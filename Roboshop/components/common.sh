@@ -53,6 +53,20 @@ MAVEN() {
     MVN_INSTALL
 }
 
+PYTHON() {
+    echo -n "Installing Python3 and other dependencies: "
+    yum install python36 gcc python3-devel -y &>> $LOGFILE
+    stat $?
+
+    # CREATING CREATE_USER FUNCTION
+    CREATE_USER
+
+    # DOWNLOADING THE CODE
+    DOWNLOAD_AND_EXTRACT
+
+    
+}
+
 CREATE_USER(){
 id $APPUSER &>> $LOGFILE
     if [ $? -ne 0 ]; then

@@ -1,3 +1,10 @@
 #!/bin/bash
+set -e
 
-echo "I am payment component"
+COMPONENT=payment
+APPUSER=roboshop
+source components/common.sh
+
+PYTHON
+
+echo -n "_______________$COMPONENT Installation is Successful______________"
