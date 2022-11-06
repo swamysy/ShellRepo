@@ -67,6 +67,9 @@ PYTHON() {
     USERID=${id -u roboshop}
     GROUPID=${id -g roboshop}
 
+    cd /home/$APPUSER/$COMPONENT/
+    pip3 install -r requirements.txt
+
     echo -n "Updating the uid and gid with $APPUSER in $PAYMENT.ini : "
     sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT.ini
     stat $?
