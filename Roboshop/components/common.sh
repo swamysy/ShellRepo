@@ -38,6 +38,21 @@ NODEJS(){
     CONFIGURE_SERVICE
 }
 
+MAVEN() {
+    echo -n "Installing Maven"
+    yum install maven -y &>> $LOGFILE
+    stat $?
+
+    # CALLING CREATE_USER FUNCTION
+    CREATE_USER
+
+    # DOWNLOADING AND EXTRACT
+    DOWNLOAD_AND_EXTRACT
+
+    # MAVEN INSTALL
+    MVN_INSTALL
+}
+
 CREATE_USER(){
 id $APPUSER &>> $LOGFILE
     if [ $? -ne 0 ]; then
@@ -71,9 +86,17 @@ NPM_INSTALL() {
     stat $?
 }
 
+MVN_INSTALL() {
+    echo -n "Installing $COMPONENT Dependencies:"
+    cd $COMPONENT
+    mvn clean package &>> $LOGFILE
+    mv target/$COMPONENT-1.0.jar $COMPONENT.jar
+    stat $?
+}
+
 CONFIGURE_SERVICE() {
     echo -n "Configuring $COMPONENT service"
-    sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' /home/roboshop/$COMPONENT/systemd.service
+    sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' /home/roboshop/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
 

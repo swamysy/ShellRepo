@@ -1,3 +1,11 @@
 #!/bin/bash
+set -e
 
-echo "I am shipping component"
+COMPONENT=shipping
+APPUSER=roboshop
+source components/common.sh
+NODEJS
+MAVEN
+
+echo -n "_______________$COMPONENT Installation is Successful______________"
+
