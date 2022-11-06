@@ -31,7 +31,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 echo show plugins | mysql -uroot -pRoboShop@1 | grep validate_password; &>> $LOGFILE
-if [ $? -ne 0 ] ; then
+if [ $? -eq 0 ] ; then
     echo -n "Uninstalling the password validate plugin: "
     echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -pRoboshop@1 &>> $LOGFILE
     stat $?
@@ -40,7 +40,7 @@ fi
 echo -n "Downloading the $COMPONENT schema"
 cd /tmp
 curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
-unzip -o mysql.zip
+unzip -o mysql.zip &>> $LOGFILE
 stat $?
 
 echo -n "Injecting the $COMPONENT Schema: "
