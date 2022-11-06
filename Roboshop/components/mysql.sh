@@ -36,3 +36,15 @@ if [ $? -ne 0 ] ; then
     echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -pRoboshop@1 &>> $LOGFILE
     stat $?
 fi
+
+echo -n "Downloading the $COMPONENT schema"
+cd /tmp
+curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
+unzip -o mysql.zip
+stat $?
+
+echo -n "Injecting the $COMPONENT Schema: "
+cd /tmp/$COMPONENT-main
+# cd mysql-main
+mysql -uroot -pRoboShop@1 < shipping.sql &>> $LOGFILE
+stat $?
